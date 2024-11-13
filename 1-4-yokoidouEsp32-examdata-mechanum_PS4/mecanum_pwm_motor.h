@@ -62,13 +62,14 @@ void CalculateCont(double &Cont_A, double &Cont_B);
 //
 void LetsMoveMoter(int32_t pwm, double Cont_A, double Cont_B) {
   const int VALUE_MAX = 255;
+  double absv=sqrt((PS4_LStickX^2)+(PS4_LStickY^2))*(VALUE_MAX/128);
   if (pwm > VALUE_MAX || pwm < -VALUE_MAX) pwm = VALUE_MAX;
 
   double directions[4] = {Cont_A, Cont_B, -Cont_B, -Cont_A};
-  frontLeftMotor(pwm * directions[0]);
-  frontRightMotor(pwm * directions[1]);
-  backRightMotor(pwm * directions[2]);
-  backLeftMotor(pwm * directions[3]);
+  frontLeftMotor(absv * directions[0]);
+  frontRightMotor(absv * directions[1]);
+  backRightMotor(absv * directions[2]);
+  backLeftMotor(absv * directions[3]);
   //これで呼び出せているはず
   //1が正典、-1が反転
 }

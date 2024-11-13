@@ -32,7 +32,11 @@ void loop() {
   //PS4.LStickX(),PS4.LStickY(),PS4.RStickX(),PS4.RStickY()がカーソルキー
   
 if (PS4.isConnected()) {
-  CalculateCont(Cont_A, Cont_B, PS4.LStickX, PS4.LStickY);
+  //ここで恐らくは「start」のコードが入ってくる
+
+  //
+  CalculateCont(Cont_A, Cont_B);
+  //これで動かす
   LetsMoveMoter(pwm, Cont_A, Cont_B);
   delay(move_time);
 }
