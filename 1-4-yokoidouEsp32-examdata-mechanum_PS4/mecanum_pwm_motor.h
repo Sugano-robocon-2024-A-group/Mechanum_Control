@@ -62,7 +62,7 @@ void CalculateCont(double &Cont_A, double &Cont_B);
 //
 void LetsMoveMoter(int32_t pwm, double Cont_A, double Cont_B) {
   const int VALUE_MAX = 255;
-  double absv=sqrt((PS4_LStickX^2)+(PS4_LStickY^2))*(VALUE_MAX/128);
+  double absv=sqrt((PS4.LStickX()^2)+(PS4.LStickY()^2))*(VALUE_MAX/128);
   if (pwm > VALUE_MAX || pwm < -VALUE_MAX) pwm = VALUE_MAX;
 
   double directions[4] = {Cont_A, Cont_B, -Cont_B, -Cont_A};
