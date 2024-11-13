@@ -8,24 +8,24 @@
 
 /* 使うピンの定義 */
 // 左前車輪
-const int LEFT_FRONT_IN1 = 23;
-const int LEFT_FRONT_IN2 = 22;
-const int LEFT_FRONT_PWM = 21;
+const int LEFT_FRONT_IN1 = 34;
+const int LEFT_FRONT_IN2 = 35;
+const int LEFT_FRONT_PWM = 33;
 
 // 左後車輪
-const int LEFT_BACK_IN1 = 1;
-const int LEFT_BACK_IN2 = 3;
-const int LEFT_BACK_PWM = 5;
+const int LEFT_BACK_IN1 = 26;
+const int LEFT_BACK_IN2 = 27;
+const int LEFT_BACK_PWM = 13;
 
 // 右前車輪
-const int RIGHT_FRONT_IN1 = 4;
-const int RIGHT_FRONT_IN2 = 16;
-const int RIGHT_FRONT_PWM = 17;
+const int RIGHT_FRONT_IN1 = 22;
+const int RIGHT_FRONT_IN2 = 3;
+const int RIGHT_FRONT_PWM = 21;
 
 // 右後車輪
-const int RIGHT_BACK_IN1 = 15;
-const int RIGHT_BACK_IN2 = 2;
-const int RIGHT_BACK_PWM = 18;
+const int RIGHT_BACK_IN1 = 4;
+const int RIGHT_BACK_IN2 = 0;
+const int RIGHT_BACK_PWM = 15;
 
 /* チャンネルの定義 */
 const int CHANNEL_LEFT_FRONT = 0;
