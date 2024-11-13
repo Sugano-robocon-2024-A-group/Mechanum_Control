@@ -64,7 +64,7 @@ void LetsMoveMoter(int32_t pwm, double Cont_A, double Cont_B) {
   const int VALUE_MAX = 255;
   if (pwm > VALUE_MAX || pwm < -VALUE_MAX) pwm = VALUE_MAX;
 
-  double directions[4] = {Cont_B, Cont_A, Cont_B, Cont_A};
+  double directions[4] = {Cont_A, Cont_B, -Cont_B, -Cont_A};
   frontLeftMotor(pwm * directions[0]);
   frontRightMotor(pwm * directions[1]);
   backRightMotor(pwm * directions[2]);
@@ -83,8 +83,12 @@ void CalculateCont(double &Cont_A, double &Cont_B) {
   Serial.printf("Left Stick y at %d\n", PS4_LStickY);
 
   // 調整の部分
-  Cont_A = PS4_LStickX / (absv*2*1.4142);//Vxの向き成分
-  Cont_B = PS4_LStickY / (absv*2*1.4142);//Vyの向き成分（絶対値かけたら速度。VALUW＿MAXに絶対値を入れ込もう）
+  cos_theta = PS4_LStickX / (absv);//Vxの向き成分
+  sin_theta = PS4_LStickY / (absv);//Vyの向き成分（絶対値かけたら速度。VALUW＿MAXに絶対値を入れ混む⇒小さくなりすぎる）
+
+  Cont_A=-(cos_theta+sin_theta)/sqrt(2);
+  Cont_B=-(cos_theta-sin_theta)/sqrt(2);
+  //
 }
 //
 
