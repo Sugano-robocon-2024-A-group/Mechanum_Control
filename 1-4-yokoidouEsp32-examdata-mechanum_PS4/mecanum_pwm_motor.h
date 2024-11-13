@@ -83,8 +83,8 @@ void CalculateCont(double &Cont_A, double &Cont_B) {
   Serial.printf("Left Stick y at %d\n", PS4_LStickY);
 
   // 調整の部分
-  cos_theta = PS4_LStickX / (absv);//Vxの向き成分
-  sin_theta = PS4_LStickY / (absv);//Vyの向き成分（絶対値かけたら速度。VALUW＿MAXに絶対値を入れ混む⇒小さくなりすぎる）
+  double cos_theta = PS4_LStickX / (absv);//Vxの向き成分
+  double sin_theta = PS4_LStickY / (absv);//Vyの向き成分（絶対値かけたら速度。VALUW＿MAXに絶対値を入れ混む⇒小さくなりすぎる）
 
   Cont_A=-(cos_theta+sin_theta)/sqrt(2);
   Cont_B=-(cos_theta-sin_theta)/sqrt(2);
