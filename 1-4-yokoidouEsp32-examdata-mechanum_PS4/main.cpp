@@ -12,10 +12,12 @@ int PS4_LStickY = 0;
 
 void setup() {
   Serial.begin(115200);
-  Serial.begin(115200);
+  Serial.println("Start");
+  delay(1000);
+  //Serial.begin(115200);
   PS4.begin("1c:69:20:e6:20:d2"); // PS4コントローラのMACアドレスを指定
   Serial.println("Booting");
-  setupOTA("Mecanum_Robot", "SSID", "PASSWORD");
+  //setupOTA("Mecanum_Robot", "SSID", "PASSWORD");
   // Your setup code
 
   init_pwm_setup();
@@ -33,6 +35,7 @@ void loop() {
   
 if (PS4.isConnected()) {
   //ここで恐らくは「start」のコードが入ってくる
+  Serial.println("Connected");
 
   //
   CalculateCont(Cont_A, Cont_B);

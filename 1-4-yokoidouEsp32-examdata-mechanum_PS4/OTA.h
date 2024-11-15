@@ -6,7 +6,7 @@
 //#include <ESP8266mDNS.h>
 #endif
 
-#include <WiFiUdp.h>
+//#include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 
 #if defined(ESP32_RTOS) && defined(ESP32)
