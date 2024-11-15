@@ -7,29 +7,25 @@
 //void ledcWrite(uint8_t channel, uint32_t duty);
 
 /* 使うピンの定義 */
-/*GPIO01を右前EN, GPIO22を右前1, GPIO23を右前2
-GPIO21を左前EN, GPIO18を左前1, GPIO19を左前2
-GPIO13を左後EN,GPIO27を左後1,GPIO14を左後2
-GPIO23を右後EN,GPIO32を右後1,GPIO33を右後2*/
 // 左前車輪
-const int LEFT_FRONT_IN1 = 21;
-const int LEFT_FRONT_IN2 = 18;
-const int LEFT_FRONT_PWM = 19;
+const int LEFT_FRONT_IN1 = 18;
+const int LEFT_FRONT_IN2 = 19;
+const int LEFT_FRONT_PWM = 21;
 
 // 左後車輪
-const int LEFT_BACK_IN1 = 13;
-const int LEFT_BACK_IN2 = 27;
-const int LEFT_BACK_PWM = 14;
+const int LEFT_BACK_IN1 = 27;
+const int LEFT_BACK_IN2 = 14;
+const int LEFT_BACK_PWM = 13;
 
 // 右前車輪
 const int RIGHT_FRONT_IN1 = 22;
-const int RIGHT_FRONT_IN2 = 3;
-const int RIGHT_FRONT_PWM = 21;
+const int RIGHT_FRONT_IN2 = 23;//
+const int RIGHT_FRONT_PWM = 16;
 
 // 右後車輪
-const int RIGHT_BACK_IN1 = 4;
-const int RIGHT_BACK_IN2 = 32;
-const int RIGHT_BACK_PWM = 33;
+const int RIGHT_BACK_IN1 = 32;
+const int RIGHT_BACK_IN2 = 33;
+const int RIGHT_BACK_PWM = 4;
 
 /* チャンネルの定義 */
 const int CHANNEL_LEFT_FRONT = 0;
@@ -78,21 +74,22 @@ void init_pwm_setup() {
 //
 void LetsMoveMoter(int32_t pwm, double Cont_A, double Cont_B) {
   const int VALUE_MAX = pwm;
-  double absv=sqrt((PS4.LStickX()^2)+(PS4.LStickY()^2))*(VALUE_MAX/128)*2;
+  double absv = sqrt(pow(PS4.LStickX(), 2) + pow(PS4.LStickY(), 2)) * (VALUE_MAX / 128);
+
   //if (pwm < VALUE_MAX || pwm > -VALUE_MAX) pwm = VALUE_MAX;
   Serial.printf("%.2lf\n", absv);
 
-  double directions[4] = {Cont_A, Cont_B, -Cont_B, -Cont_A};
-  if(absv<5){
+  double directions[4] = {Cont_B, Cont_A, Cont_A, Cont_B};//左前、左後、右前、右後
+  if(absv<10){//
     absv=0.0;
     }
   frontLeftMotor(absv * directions[0]);
-  frontRightMotor(absv * directions[1]);
-  backRightMotor(absv * directions[2]);
+  backRightMotor(absv * directions[1]);
+  frontRightMotor(absv * directions[2]);
   backLeftMotor(absv * directions[3]);
   //これで呼び出せているはず
   //1が正典、-1が反転
-
+  //前進で全て１、後退で全てー１、右でCont＿A
   
 }
 
@@ -109,9 +106,10 @@ void CalculateCont(double &Cont_A, double &Cont_B) {
   double cos_theta = PS4_LStickX / (absv);//Vxの向き成分
   double sin_theta = PS4_LStickY / (absv);//Vyの向き成分（絶対値かけたら速度。VALUW＿MAXに絶対値を入れ混む⇒小さくなりすぎる）
 
-  Cont_A=-(cos_theta+sin_theta)/sqrt(2);
-  Cont_B=-(cos_theta-sin_theta)/sqrt(2);
+  Cont_A=(cos_theta+sin_theta)/sqrt(2);
+  Cont_B=(-cos_theta+sin_theta)/sqrt(2);
   //
+  //nunというのが変　100より低いと同じ回転数にならない
 }
 
 //この先は各車輪ごとの制御

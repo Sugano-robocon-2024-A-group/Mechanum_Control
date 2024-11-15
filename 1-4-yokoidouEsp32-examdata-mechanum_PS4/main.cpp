@@ -26,8 +26,10 @@ void setup() {
 
 }
 
+//Xの成分が正のときに正、yが正の時で入ってる
+
 void loop() {
-  int pwm = 255; // max = 255
+  int pwmmax = 255; // max = 255
   int move_time = 100; //ms
 
   //これでLスティックを使った形。斜め移動を取り入れたver.
@@ -40,7 +42,7 @@ if (PS4.isConnected()) {
   //
   CalculateCont(Cont_A, Cont_B);
   //これで動かす
-  LetsMoveMoter(pwm, Cont_A, Cont_B);
+  LetsMoveMoter(pwmmax, Cont_A, Cont_B);
   delay(move_time);
 }
 }
