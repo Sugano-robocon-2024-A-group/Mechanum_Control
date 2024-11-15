@@ -27,7 +27,7 @@ const int RIGHT_FRONT_IN2 = 3;
 const int RIGHT_FRONT_PWM = 21;
 
 // 右後車輪
-const int RIGHT_BACK_IN1 = 23;
+const int RIGHT_BACK_IN1 = 4;
 const int RIGHT_BACK_IN2 = 32;
 const int RIGHT_BACK_PWM = 33;
 
@@ -78,10 +78,14 @@ void init_pwm_setup() {
 //
 void LetsMoveMoter(int32_t pwm, double Cont_A, double Cont_B) {
   const int VALUE_MAX = pwm;
-  double absv=sqrt((PS4.LStickX()^2)+(PS4.LStickY()^2))*(VALUE_MAX/128);
+  double absv=sqrt((PS4.LStickX()^2)+(PS4.LStickY()^2))*(VALUE_MAX/128)*2;
   //if (pwm < VALUE_MAX || pwm > -VALUE_MAX) pwm = VALUE_MAX;
+  Serial.printf("%.2lf\n", absv);
 
   double directions[4] = {Cont_A, Cont_B, -Cont_B, -Cont_A};
+  if(absv<5){
+    absv=0.0;
+    }
   frontLeftMotor(absv * directions[0]);
   frontRightMotor(absv * directions[1]);
   backRightMotor(absv * directions[2]);
