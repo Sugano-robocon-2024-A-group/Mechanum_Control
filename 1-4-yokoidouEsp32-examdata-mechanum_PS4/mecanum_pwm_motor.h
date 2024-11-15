@@ -7,15 +7,19 @@
 //void ledcWrite(uint8_t channel, uint32_t duty);
 
 /* 使うピンの定義 */
+/*GPIO01を右前EN, GPIO22を右前1, GPIO23を右前2
+GPIO21を左前EN, GPIO18を左前1, GPIO19を左前2
+GPIO13を左後EN,GPIO27を左後1,GPIO14を左後2
+GPIO27を右後EN,GPIO32を右後1,GPIO33を右後2*/
 // 左前車輪
-const int LEFT_FRONT_IN1 = 34;
-const int LEFT_FRONT_IN2 = 35;
-const int LEFT_FRONT_PWM = 33;
+const int LEFT_FRONT_IN1 = 21;
+const int LEFT_FRONT_IN2 = 18;
+const int LEFT_FRONT_PWM = 19;
 
 // 左後車輪
-const int LEFT_BACK_IN1 = 26;
+const int LEFT_BACK_IN1 = 13;
 const int LEFT_BACK_IN2 = 27;
-const int LEFT_BACK_PWM = 13;
+const int LEFT_BACK_PWM = 14;
 
 // 右前車輪
 const int RIGHT_FRONT_IN1 = 22;
@@ -23,9 +27,9 @@ const int RIGHT_FRONT_IN2 = 3;
 const int RIGHT_FRONT_PWM = 21;
 
 // 右後車輪
-const int RIGHT_BACK_IN1 = 4;
-const int RIGHT_BACK_IN2 = 0;
-const int RIGHT_BACK_PWM = 15;
+const int RIGHT_BACK_IN1 = 27;
+const int RIGHT_BACK_IN2 = 32;
+const int RIGHT_BACK_PWM = 33;
 
 /* チャンネルの定義 */
 const int CHANNEL_LEFT_FRONT = 0;
